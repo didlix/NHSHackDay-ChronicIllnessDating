@@ -2,19 +2,76 @@
 
 {%block body %}
 
-<h1>Meet people who share not only your diagnosis, but also your interests.</h1>
 
-<p>Welcome to _insertnamehere_. Being diagnosed with a chronic health condition can be isolating. _insertnamehere_ helps you to find people who share not only your diagnosis, but also your interests. </p>
 
-<p>It allows you to:</p>
-<ul class="square">
-  <li>share your experiences</li>
-  <li>swap tips on how to live well with a chronic condition</li>
-  <li>meet people with common interests</li>
-</ul>
+<div class="sixteen columns">
+<h1 id="home">Meet people who share not only your diagnosis, but also your interests.</h1>
+</div>
 
-<p>Join for free and create your profile, letting people know who you are, what you like and who you would like to meet. You will be able to search for people with specific conditions, symptoms, or interests. Then you can start contacting them within _insertnamehere_.</p>
+<div class="six columns">
 
-<p><a href="/user/register">Create your profile today!</a></p>
+<h3>Something interesting</h3>
+
+</div>
+
+<div class="eight columns">
+
+  <p>Being diagnosed with a chronic health condition can be isolating. _insertnamehere_ helps you to find people who share not only your diagnosis, but also your interests. </p>
+
+</div>
+<hr>
+
+<div class="six columns">
+
+  <h3>It allows you to:</h3>
+
+</div>
+
+<div class="eight columns">
+
+  <ul class="square">
+    <li>share your experiences</li>
+    <li>swap tips on how to live well with a chronic condition</li>
+    <li>meet people with common interests</li>
+  </ul>
+
+</div>
+
+<hr>
+
+<div class="six columns">
+
+  <h3>You should join because Unicorns and Rainbows</h3>
+
+</div>
+
+<div class="eight columns">
+
+  <p>Join for free and create your profile, letting people know who you are, what you like and who you would like to meet. You will be able to search for people with specific conditions, symptoms, or interests. Then you can start contacting them within _insertnamehere_.</p>
+
+  <p><a href="/user/register">Create your profile today!</a></p>
+
+</div>
+
+<hr>
+
+<div class="six columns">
+
+  <h3>Login</h3>
+
+  <form action="/user/login">
+
+    <!-- Label and text input -->
+    <label for="regularInput">Username / e-mail</label>
+    <input type="text" id="regularInput" />
+
+  <label for="password">Password</label>
+    <input type="text" id="password" />
+
+    <button type="submit">Login</button>
+
+  </form>
+
+</div>
 
 {% endblock %}
