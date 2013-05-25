@@ -8,7 +8,7 @@
   <!-- Basic Page Needs
   ================================================== -->
   <meta charset="utf-8">
-  <title>Hospital Social Club</title>
+  <title>Hospital Social Club – {% block title %}{% endblock %}</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -38,12 +38,38 @@
 
 
 
+
+
   <!-- Primary Page Layout
   ================================================== -->
 
   <!-- Delete everything in this .container and get started on your own site! -->
 
   <div class="container">
+
+
+    <div class="three columns sidebar">
+
+
+      <h3 id="logo">NHS Dating</h3>
+
+      <nav>
+
+        <ul>
+
+          <li><a href="/about">About</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/profile/edit">Edit Profile</a></li>
+          <li><a href="/matches">Matches</a></li>
+          <li><a href="/search">Search</a></li>
+
+        </ul>
+
+      </nav>
+
+    </div>
+
+
 
     {% block body %}{% endblock %}
 
