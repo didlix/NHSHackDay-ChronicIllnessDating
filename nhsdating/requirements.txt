@@ -1,7 +1,3 @@
 psycopg2
 Django
-django-south
-
-
-
-
+South
