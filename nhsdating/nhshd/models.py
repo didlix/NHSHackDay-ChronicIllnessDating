@@ -10,8 +10,8 @@ def format_filename(format_string):
     and returns a function for the FileField
     """
     def upload_to(instance, filename):
-        return format_string.format(obj=instance, filename=filename})
-
+        return format_string.format(obj=instance, filename=filename)
+    return upload_to
 
 class Patient(models.Model):
     pass
@@ -26,5 +26,5 @@ class Symptom(models.Model):
 
 
 class Photo(models.Model):
-    created_by = models.ForeignKey('contrib.auth.models.User')
-    image = models.ImageField(upload_to=format_filename("/photos/{filename}"))
+    created_by = models.ForeignKey('auth.User')
+    image = models.FileField(upload_to=format_filename("/photos/{filename}"))
