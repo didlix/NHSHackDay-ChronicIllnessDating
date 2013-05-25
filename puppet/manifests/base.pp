@@ -50,3 +50,4 @@ class doinstall {
 }
 
 include doinstall
+include elasticsearch

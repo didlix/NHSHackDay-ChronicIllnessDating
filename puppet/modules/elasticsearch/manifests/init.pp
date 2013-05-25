@@ -8,6 +8,8 @@ class elasticsearch {
     unless => "test -f /tmp/$full.deb"
   }
 
+  package { "default-jre": }
+
   package { "elasticsearch":
     provider => dpkg,
     ensure   => latest,
@@ -17,9 +19,7 @@ class elasticsearch {
       Exec["download-elasticsearch"],
     ]
   }
-
-  package { "default-jre": }
-
+  
   service { "elasticsearch":
     enable  => true,
     ensure  => running,
