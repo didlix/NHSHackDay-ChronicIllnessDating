@@ -20,6 +20,8 @@ class Patient(models.Model):
     gender = models.FloatField(default=0.5)
     age = models.IntegerField(null=True)
 
+    photo = models.ForeignKey('Photo')
+
     locations = models.ManyToManyField('Place')
     symptoms = models.ManyToManyField('Symptom')
     interests = models.ManyToManyField('Interest')
