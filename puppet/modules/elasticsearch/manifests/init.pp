@@ -19,7 +19,7 @@ class elasticsearch {
       Exec["download-elasticsearch"],
     ]
   }
-  
+
   service { "elasticsearch":
     enable  => true,
     ensure  => running,
