@@ -17,7 +17,7 @@ def format_filename(format_string):
 class Patient(models.Model):
     user = models.ForeignKey('auth.User')
     name = models.CharField(null=True, max_length=200)
-    gender = models.FloatField(default=0.5)
+    gender = models.CharField(max_length=200)
     age = models.IntegerField(null=True)
 
     photo = models.ForeignKey('Photo', null=True)
@@ -32,6 +32,7 @@ class Patient(models.Model):
 
 class Place(models.Model):
     name = models.CharField(max_length=200)
+    location = models.CharField(max_length=200)
 
 
 class Interest(models.Model):
