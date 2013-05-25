@@ -44,6 +44,8 @@ class Patient(models.Model):
     preocupations = models.TextField(blank=True)
     what_im_looking_for = models.TextField(blank=True)
 
+    def __unicode__(self):
+        return u'%s (%s)' % (self.name, self.user.username)
 
 class Place(models.Model):
     name = models.CharField(max_length=200)
@@ -55,6 +57,9 @@ class Place(models.Model):
 
 class HealthcareLocation(models.Model):
     name = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Interest(models.Model):
@@ -72,6 +77,8 @@ class Symptom(models.Model):
 class Condition(models.Model):
     name = models.CharField(max_length=200)
 
+    def __unicode__(self):
+        return self.name
 
 class Photo(models.Model):
     created_by = models.ForeignKey('auth.User')

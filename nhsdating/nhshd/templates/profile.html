@@ -3,32 +3,53 @@
 {%block body %}
 
 <div class="four columns alpha">
-    <h1>{{ patient }}</h1>
+    <h1>{{ patient.name }}</h1>
 
     {% if patient.photo %}<img src="{{ patient.photo.image.url }} ">{% else %}<img src="https://addons.cdn.mozilla.net/media//img/zamboni/anon_user.png">{% endif %}
 
   <ul>
     <li>Username: {{ patient.user.username }}</li>
-    <li>Sex: {{ patient.gender }}</li>
+    <li>Gender: {{ patient.gender }}</li>
     <li>Age: {{ patient.age }}</li>
     <li>Location: {{ patient.location }}</li>
+    <li>Religion: {{ patient.religion }}</li>
+    <li></li>
   </ul>
 
 </div> <!-- four columns -->
 
 <div class="eight columns alpha">
 
+  <h3>My self-summary</h3>
   {{ patient.personal_words }}
+
+  <h3>What I'm doing with my life</h3>
+  {{ patient.life_plan }}
+
+  <h3>I'm really good at</h3>
+  {{patient.skills}}
+
+  <h3>I spend a lot of time thinking about</h3>
+
+  {{patient.preocupations}}
+
+  <h3>Favorite books, movies, shows, music, and food</h3>
 
   {{ patient.favourite_words }}
 
+  <h3>What I'm looking for</h3>
 
-  {% for l in patient.locations %}
+  {{patient.what_im_looking_for}}
+
+
+
+
+  {% for l in patient.locations.all %}
   {{ l.name }}, {{ l.location }}
   {% endfor %}
 
   <ul class="square">
-  {% for i in patient.interests %}
+  {% for i in patient.interests.all %}
     <li>{{ i.name }}</li>
   {% endfor %}
   </ul>

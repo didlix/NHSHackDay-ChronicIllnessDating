@@ -18,9 +18,9 @@
     <h3>Results</h3>
 
     {% for result in page.object_list %}
-    <p>
-        <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
-    </p>
+    <div class="search_result">
+        {{ result.rendered|safe }}
+    </div>
     {% empty %}
     <p>No results found.</p>
     {% endfor %}
