@@ -4,22 +4,17 @@
 
 {%block body %}
 
-
-<div class="sixteen columns">
-    <h1>{{ patient.user.username }}</h1>
-</div>
 <div class="sixteen columns promo">
 
-  <div class="six columns alpha">
-    {% if patient.photo %}<img src="{{ patient.photo.image.url }} ">{% else %}<img src="https://addons.cdn.mozilla.net/media//img/zamboni/anon_user.png">{% endif %}
+    {% if patient.photo %}<img src="{{ patient.photo.image.url }} " class="profileimg">{% else %}<img src="https://addons.cdn.mozilla.net/media//img/zamboni/anon_user.png" class="profileimg">{% endif %}
 
-  </div>
+    <h1 id="profile">{{ patient.user.username }}</h1>
 
-  <div class="eight columns alpha" id="profile-box">
+    <p>{{ patient.gender }}, {{ patient.age }}<br>{{ patient.locations.all.0 }}</p>
 
-      <p>{{ patient.gender }}, {{ patient.age }}<br>{{ patient.locations.all.0 }}</p>
-
-
+    <a href="#" class="button">Message them</a>
+    <a href="#" class="button">Save to favourites</a>
+    <a href="#" class="button">Report</a>
   </div>
 
 </div> <!-- six columns -->

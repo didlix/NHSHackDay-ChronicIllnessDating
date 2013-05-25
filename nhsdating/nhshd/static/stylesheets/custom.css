@@ -51,8 +51,12 @@ footer {
   padding-top: 10px;
   margin-top: 50px;
   font-family: 'Amaranth';
+
 }
 
+footer p {
+    font-weight: bolder;
+}
 
 img{
   border:1px solid #ccc;
@@ -61,3 +65,9 @@ img{
   box-shadow:5px 5px 10px #bbb;
 }
 
+.promo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h1#profile { color: #f60; }
