@@ -15,9 +15,8 @@
     <a href="#" class="button">Message them</a>
     <a href="#" class="button">Save to favourites</a>
     <a href="#" class="button">Report</a>
-  </div>
 
-</div> <!-- six columns -->
+</div>
 
 <div class="sixteen columns">
 
@@ -80,35 +79,5 @@
 
 
 </div>
-
-<div class="six columns alpha">
-
-  <h4>Their Details:</h4>
-
-    <ul>
-      <li>Locations:
-        <ul>
-        {% for l in patient.location.all %}
-        {{ l.location }}
-        {% endfor %}
-
-      </ul>
-      </li>
-      <li>Religion: {{ patient.religion }}</li>
-      <li>Primary Condition: {{patient.primary_condition}}</li>
-      <li>Other Conditions:
-
-        {% for oc in patient.other_conditions.all %}
-        {{oc.condition}}
-        {% endfor %}
-
-      </li>
-    </ul>
-</div>
-
-
-
-
-
 
 {% endblock %}
