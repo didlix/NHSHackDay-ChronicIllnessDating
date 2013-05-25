@@ -15,8 +15,8 @@ DATABASES = {
         'NAME': 'nhsdb',
         'USER': 'nhsdb',
         'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
