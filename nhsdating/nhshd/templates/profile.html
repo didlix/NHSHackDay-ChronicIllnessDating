@@ -2,31 +2,38 @@
 
 {%block body %}
 
-do a block-title or block-head above or something with title details like {{ patient }} homepage
 <div class="four columns alpha">
     <h1>{{ patient }}</h1>
+
+    {% if patient.photo %}<img src="{{ patient.photo.image.url }} ">{% else %}<img src="https://addons.cdn.mozilla.net/media//img/zamboni/anon_user.png">{% endif %}
+
+  <ul>
+    <li>Username: {{ patient.user.username }}</li>
+    <li>Sex: {{ patient.gender }}</li>
+    <li>Age: {{ patient.age }}</li>
+    <li>Location: {{ patient.location }}</li>
+  </ul>
+
 </div> <!-- four columns -->
-Formatting-free info below<br>
-{% if patient.photo %}<img src="{{ patient.photo.image.url }} ">{% else %}<img src="https://addons.cdn.mozilla.net/media//img/zamboni/anon_user.png">{% endif %}
-Username: {{ patient.user.username }}
-Sex: {{ patient.gender }}
-Age: {{ patient.age }}
-Other fields:
-{{ patient.personal_words }}
-{{ patient.favourite_words }}
 
-{% for s in patient.symptoms %}
-{{ s.name }}
-{% endfor %}
-{% for l in patient.locations %}
-{{ l.name }}, {{ l.location }}
-{% endfor %}
-{% for i in patient.interests %}
-{{ i.name }}
-{% endfor %}
+<div class="eight columns alpha">
 
-{{ patient.location }}
+  {{ patient.personal_words }}
 
+  {{ patient.favourite_words }}
+
+
+  {% for l in patient.locations %}
+  {{ l.name }}, {{ l.location }}
+  {% endfor %}
+
+  <ul class="square">
+  {% for i in patient.interests %}
+    <li>{{ i.name }}</li>
+  {% endfor %}
+  </ul>
+
+</div>
 
 
 
