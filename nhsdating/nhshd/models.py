@@ -44,6 +44,8 @@ class Patient(models.Model):
     preocupations = models.TextField(null=True)
     what_im_looking_for = models.TextField(null=True)
 
+    def __unicode__(self):
+        return self.name
 
 class Place(models.Model):
     name = models.CharField(max_length=200)
