@@ -26,6 +26,9 @@ h1 {
   font-size: 35px;
   line-height: 100%;
 }
+h1#home {
+  margin: 40px 0 70px 0;
+}
 h3 {
   color: #181818;
 }
