@@ -18,9 +18,11 @@
 
   <!-- CSS
   ================================================== -->
+  <link href='http://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="{{STATIC_URL}}stylesheets/base.css">
   <link rel="stylesheet" href="{{STATIC_URL}}stylesheets/skeleton.css">
   <link rel="stylesheet" href="{{STATIC_URL}}stylesheets/layout.css">
+  <link rel="stylesheet" href="{{STATIC_URL}}stylesheets/custom.css">
 
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -47,21 +49,29 @@
 
   <div class="container">
 
+    <header>
 
-    <div class="three columns sidebar">
-      <h3 id="logo">NHS Dating</h3>
-      <nav>
-        <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/profile">Profile</a></li>
-          <li><a href="/profile/edit">Edit Profile</a></li>
-          <li><a href="/matches">Matches</a></li>
-          <li><a href="/search">Search</a></li>
-        </ul>
-      </nav>
-    </div>
+      <div class="eight columns">
+        <h3 id="logo"><a href="/">NHS Dating</a></h3>
+      </div>
 
-    <div class="twelve columns offset-by-one content">
+      <div class="eight columns">
+        <nav>
+          <ul>
+            <li><a href="/about">About</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/profile/edit">Edit Profile</a></li>
+            <li><a href="/matches">Matches</a></li>
+            <li><a href="/search">Search</a></li>
+          </ul>
+        </nav>
+      </div>
+
+    </header>
+
+
+
+    <div class="sixteen columns offset-by-one content">
 
       {% block body %}{% endblock %}
 
