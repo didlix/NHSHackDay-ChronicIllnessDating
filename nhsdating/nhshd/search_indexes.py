@@ -3,6 +3,7 @@ from haystack import indexes
 from nhshd.models import Patient
 
 class NHSHD(indexes.SearchIndex, indexes.Indexable):
+    text            = indexes.CharField(document=True, use_template=True)
     gender          = indexes.CharField(model_attr='user')
     age             = indexes.CharField(model_attr='age')
     locations       = indexes.CharField(model_attr='locations')

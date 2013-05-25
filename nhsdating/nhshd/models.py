@@ -20,7 +20,7 @@ class Patient(models.Model):
     gender = models.CharField(max_length=200)
     age = models.IntegerField(null=True)
 
-    photo = models.ForeignKey('Photo', null=True)
+    photo = models.ForeignKey('Photo', null=True, blank=True)
 
     locations = models.ManyToManyField('Place', null=True)
     symptoms = models.ManyToManyField('Symptom', null=True)
@@ -49,6 +49,9 @@ class Place(models.Model):
     name = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
 
+    def __unicode__(self):
+        return self.name
+
 
 class HealthcareLocation(models.Model):
     name = models.CharField(max_length=200)
@@ -57,10 +60,14 @@ class HealthcareLocation(models.Model):
 class Interest(models.Model):
     name = models.CharField(max_length=200)
 
+    def __unicode__(self):
+        return self.name
 
 class Symptom(models.Model):
     name = models.CharField(max_length=200)
 
+    def __unicode__(self):
+        return self.name
 
 class Condition(models.Model):
     name = models.CharField(max_length=200)

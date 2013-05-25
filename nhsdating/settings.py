@@ -117,6 +117,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'nhshd',
     'haystack',
+    'south'
 )
 
 # A sample logging configuration. The only tangible logging
