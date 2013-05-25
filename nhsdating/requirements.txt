@@ -4,3 +4,4 @@ South
 django-haystack
 pyelasticsearch
 requests
+markdown
