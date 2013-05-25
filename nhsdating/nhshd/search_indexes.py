@@ -4,7 +4,8 @@ from nhshd.models import Patient
 
 class NHSHD(indexes.SearchIndex, indexes.Indexable):
     text            = indexes.CharField(document=True, use_template=True)
-    gender          = indexes.CharField(model_attr='user')
+    name            = indexes.CharField(model_attr='name')
+    gender          = indexes.CharField(model_attr='gender')
     age             = indexes.CharField(model_attr='age')
     locations       = indexes.CharField(model_attr='locations')
     symptoms        = indexes.CharField(model_attr='symptoms')
