@@ -20,11 +20,11 @@ class Patient(models.Model):
     gender = models.CharField(max_length=200)
     age = models.IntegerField(null=True)
 
-    photo = models.ForeignKey('Photo')
+    photo = models.ForeignKey('Photo', null=True)
 
-    locations = models.ManyToManyField('Place')
-    symptoms = models.ManyToManyField('Symptom')
-    interests = models.ManyToManyField('Interest')
+    locations = models.ManyToManyField('Place', null=True)
+    symptoms = models.ManyToManyField('Symptom', null=True)
+    interests = models.ManyToManyField('Interest', null=True)
 
     personal_words = models.TextField()
     favourite_words = models.TextField()
