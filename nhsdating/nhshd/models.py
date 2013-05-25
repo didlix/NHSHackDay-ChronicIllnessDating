@@ -45,7 +45,7 @@ class Patient(models.Model):
     what_im_looking_for = models.TextField(null=True)
 
     def __unicode__(self):
-        return self.name
+        return u'%s (%s)' % (self.name, self.user.username)
 
 class Place(models.Model):
     name = models.CharField(max_length=200)
