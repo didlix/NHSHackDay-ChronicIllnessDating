@@ -8,13 +8,13 @@ Vagrant::Config.run do |config|
   config.vm.box_url = "http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-vagrant-i386-disk1.box"
 
   # Set a hostname.
-  config.vm.host_name = "nhsdating.local"
+  config.vm.host_name = "nhsdating.192.168.33.10.xip.io"
 
   # Add a host-only network adapter, for samba etc.
   config.vm.network :hostonly, "192.168.33.10"
 
   # Ensure the project directory is shared with the guest.
-  config.vm.share_folder "nhshd", "/mnt/nhshd", "./nhshd"
+  config.vm.share_folder "nhsdating", "/mnt/nhsdating", "./nhsdating"
 
 
   # Configure puppet.

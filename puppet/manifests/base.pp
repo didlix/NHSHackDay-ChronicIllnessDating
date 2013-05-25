@@ -1,5 +1,3 @@
-stage { 'req-install': before => Stage['rvm-install'] }
-
 class requirements {
   group { "puppet": ensure => "present", }
   exec { "apt-update":
@@ -7,7 +5,7 @@ class requirements {
   }
 
   package {
-    ["python", "language-pack-en", "postgresql", "sqllite" "postgresql-client", "libpq-dev", "git-core", "libgdbm-dev", "libncurses5-dev", "libtool", "pkg-config", "libffi-dev"]:
+    ["python", "build-essential", "python-dev", "virtualenvwrapper", "language-pack-en", "postgresql", "sqlite", "postgresql-client", "libpq-dev", "git-core", "libgdbm-dev", "libncurses5-dev", "libtool", "pkg-config", "libffi-dev"]:
       ensure => installed, require => Exec['apt-update']
   }
 }
@@ -24,21 +22,21 @@ class createdb {
 
 class startapp {
 
-  exec { 'mkvirtualenv NHSHD':
-    command => 'mkvirtualenv NHSHD',
-    cwd => '/mnt/NHSHD',
+  exec { 'virtualenv NHSHD':
+    command => '/usr/bin/virtualenv NHSHD',
+    cwd => '/home/vagrant',
     logoutput => true;
   }
 
-  exec { 'workon NHSHD':
-    command => 'workon NHSHD',
-    cwd => '/mnt/NHSHD',
+  exec { '/usr/bin/pip':
+    command => '/usr/bin/pip install -r /mnt/nhsdating/requirements.txt',
+    cwd => '/mnt/nhsdating',
     logoutput => true;
   }
 
   exec { 'python manage.py runserver':
-    command => 'python manage.py runserver',
-    cwd => '/mnt/NHSHD',
+    command => '/usr/bin/python manage.py runserver 192.168.33.10:80 &',
+    cwd => '/mnt/nhsdating',
     logoutput => true;
   }
 }
@@ -46,8 +44,6 @@ class startapp {
 class doinstall {
   include requirements
   include createdb
-  include installapp
-  include bundleinstall
   include startapp
 
   Class['requirements'] -> Class['createdb'] -> Class['startapp']
