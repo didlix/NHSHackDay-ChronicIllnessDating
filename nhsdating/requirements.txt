@@ -1,3 +1,4 @@
 psycopg2
 Django
 South
+django-haystack
