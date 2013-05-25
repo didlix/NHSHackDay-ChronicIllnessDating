@@ -58,6 +58,9 @@ class Place(models.Model):
 class HealthcareLocation(models.Model):
     name = models.CharField(max_length=200)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Interest(models.Model):
     name = models.CharField(max_length=200)
@@ -74,6 +77,8 @@ class Symptom(models.Model):
 class Condition(models.Model):
     name = models.CharField(max_length=200)
 
+    def __unicode__(self):
+        return self.name
 
 class Photo(models.Model):
     created_by = models.ForeignKey('auth.User')
