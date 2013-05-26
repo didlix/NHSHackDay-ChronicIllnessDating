@@ -54,6 +54,19 @@ def conversation(request, sender_name):
     return TemplateResponse(request, 'convo.html',
                             {"convo": messages})
 
+def send_message(request):
+    if request.method == "POST":
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save()
+            return HttpResponseRedirect(
+                reverse('conversation', kwargs={"sender_name": message.sender.username})
+            )
+    else:
+        form = MessageForm()
+
+    return TemplateResponse(request, 'send.html', {"form": form})
+
 
 def matches(request):
     """
