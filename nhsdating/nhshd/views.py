@@ -140,10 +140,16 @@ def matches(request):
                            )
 
     return TemplateResponse(
-        request, 'matches.html',
-        {"matches": matches,
-         "init_conditions": ",".join(chain([patient.primary_condition.name], (c.name for c in patient.other_conditions.all()))),
-         "init_symptoms": ",".join(s.name for s in patient.symptoms.all()),
-         "init_interests": ",".join(i.name for i in patient.interests.all())
-         }
+            request, 'matches.html',
+            {
+                "matches": matches,
+                "init_conditions": request.GET.get('conditions') or ",".join(
+                    chain(
+                        [patient.primary_condition.name],
+                        (c.name for c in patient.other_conditions.all())
+                        )
+                    ),
+            "init_symptoms": request.GET.get('symptoms') or ",".join(s.name for s in patient.symptoms.all()),
+            "init_interests": request.GET.get('interests') or ",".join(i.name for i in patient.interests.all())
+            }
     )
