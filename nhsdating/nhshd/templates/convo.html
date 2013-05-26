@@ -1,0 +1,10 @@
+{% extends "layouts/base.html" %}
+{% load markup %}
+
+{% block body %}
+<ol>
+{% for message in convo %}
+    <li>{{ message }}
+{% endfor %}
+</ol>
+{% endblock %}

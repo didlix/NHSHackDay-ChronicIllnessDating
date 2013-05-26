@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.shortcuts import get_object_or_404
-
+from django.db import models
 
 from models import Patient, Message
 
@@ -39,6 +39,21 @@ def inbox(request):
     messages.sort(key=lambda m: m.created_at, reverse=True)
     return TemplateResponse(request, 'inbox.html',
                             {"inbox": messages})
+
+
+def conversation(request, sender_name):
+    #patient = get_object_or_404(Patient, user__username=request.user.username)
+
+    messages = Message.objects.filter(
+        models.Q(sender__username=sender_name,
+          receiver=request.user) |
+        models.Q(receiver__username=sender_name,
+          sender=request.user)
+    ).order_by('-created_at')
+
+    return TemplateResponse(request, 'convo.html',
+                            {"convo": messages})
+
 
 def matches(request):
     """
