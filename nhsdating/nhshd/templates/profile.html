@@ -108,7 +108,7 @@
   </div>
   <div class="columns eight">
       {% for s in patient.symptoms.all %}
-      <a href="{% url 'search' %}?_={{ s.name }}">{{ s.name }}</a>
+      <a href="{% url 'matches' %}?symptom={{ s.name }}">{{ s.name }}</a>
       {% endfor %}
   </div>
   <hr>
@@ -120,7 +120,7 @@
   </div>
   <div class="columns eight">
       {% for x in patient.healthcare_location.all %}
-      <a href="{% url 'search' %}?_={{ x.name }}">{{ x.name }}</a>
+      <a href="{% url 'matches' %}?location={{ x.name }}">{{ x.name }}</a>
       {% endfor %}
   </div>
   <hr>
@@ -131,7 +131,7 @@
       <h3>Primary Condition</h3>
   </div>
   <div class="columns eight">
-      <a href="{% url 'search' %}?_={{ patient.primary_condition }}">{{ patient.primary_condition }}</a>
+      <a href="{% url 'matches' %}?conditions={{ patient.primary_condition }}">{{ patient.primary_condition }}</a>
   </div>
   <hr>
   {% endif %}
@@ -142,7 +142,7 @@
   </div>
   <div class="columns eight">
       {% for x in patient.other_conditions.all %}
-      <a href="{% url 'search' %}?_={{ x.name }}">{{ x.name }}</a>
+      <a href="{% url 'matches' %}?conditions={{ x.name }}">{{ x.name }}</a>
       {% endfor %}
   </div>
   <hr>
@@ -153,7 +153,7 @@
       <h3>Religion</h3>
   </div>
   <div class="columns eight">
-      <a href="{% url 'search' %}?_={{ patient.religion.name }}">{{ patient.religion.name }}</a>
+      <a href="{% url 'matches' %}?religions={{ patient.religion.name }}">{{ patient.religion.name }}</a>
   </div>
   <hr>
   {% endif %}

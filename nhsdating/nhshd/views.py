@@ -117,7 +117,7 @@ def matches(request):
     if request.GET.get('near_me'):
         locations = patient.locations.all()
     else:
-        locations = []
+        locations = _resolve_by_name(Symptom, request.GET.get('location'))
 
     print "Matching On:"
     print "Interests: %s" % interests
