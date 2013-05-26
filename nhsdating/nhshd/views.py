@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.shortcuts import get_object_or_404
 
@@ -8,6 +9,14 @@ from models import Patient
 def home(request):
     return TemplateResponse(request, 'home.html', {})
 
+
+def your_profile(request):
+    """
+    Redirect to the profile of the logged in user
+    """
+    return HttpResponseRedirect(
+        reverse('profile', kwargs={"username": request.user.username})
+    )
 
 def profile(request, username):
     """

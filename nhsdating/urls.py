@@ -8,6 +8,7 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     url(r'^search', include('haystack.urls')),
     url(r'^matches', 'nhshd.views.matches', name='matches'),
+    url(r'^profile', 'nhshd.views.your_profile', name='your_profile'),
     url(r'^(?P<username>[^/]+)$', 'nhshd.views.profile', name='profile'),
     url(r'^$', 'nhshd.views.home', name='home'),
 )
