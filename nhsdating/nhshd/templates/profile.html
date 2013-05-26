@@ -60,7 +60,7 @@
   <div class="columns six">
   <h3>I spend a lot of time thinking about</h3>
   </div>
-  
+
   <div class="columns eight">
   {{patient.preocupations|markdown}}
   </div>
@@ -71,7 +71,7 @@
   <div class="columns six">
   <h3>Favorite books, movies, shows, music, and food</h3>
   </div>
-  
+
   <div class="columns eight">
   {{ patient.favourite_words|markdown }}
   </div>
@@ -85,6 +85,19 @@
 
   <div class="columns eight">
   {{patient.what_im_looking_for|markdown}}
+  </div>
+  <hr>
+  {% endif %}
+
+  {% if patient.interests %}
+  <div class="columns six">
+      <h3>Interests</h3>
+  </div>
+
+  <div class="columns eight">
+      {% for interest in patient.interests.all %}
+      <a href="{% url 'matches' %}?interest={{interest.name}}">{{interest.name}}</a>
+      {% endfor %}
   </div>
   <hr>
   {% endif %}

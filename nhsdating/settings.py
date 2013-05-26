@@ -15,7 +15,7 @@ DATABASES = {
         'NAME': 'nhsdb',
         'USER': 'nhsdb',
         'PASSWORD': '',
-        'HOST': '192.168.48.74',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -152,6 +152,3 @@ HAYSTACK_CONNECTIONS = {
         'INDEX_NAME': 'haystack',
     },
 }
-
-from django12factor import factorise
-globals().update(factorise())

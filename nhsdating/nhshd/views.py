@@ -4,7 +4,7 @@ from django.template.response import TemplateResponse
 from django.shortcuts import get_object_or_404
 from django.db import models
 
-from models import Patient, Message
+from models import Patient, Message, Interest
 
 def home(request):
     return TemplateResponse(request, 'home.html', {})
@@ -72,11 +72,18 @@ def matches(request):
     """
     List of users who have things in common with request.user
     """
+    # Add three years either side.
+    # Sort by gender first.
 
     patient = get_object_or_404(Patient, user__username=request.user.username)
+
     matches = Patient.objects.filter(
         other_conditions__in=patient.other_conditions.all()
     ).exclude(pk=patient.id).distinct()
+
+    if request.GET.get("interest"):
+        interest = get_object_or_404(Interest, name=request.GET["interest"])
+        matches = matches.filter(interests=interest)
 
     return TemplateResponse(
         request, 'matches.html',
