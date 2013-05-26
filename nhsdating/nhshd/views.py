@@ -149,7 +149,7 @@ def matches(request):
                         (c.name for c in patient.other_conditions.all())
                         )
                     ),
-            "init_symptoms": request.GET.get('symptoms') or ",".join(s.name for s in patient.symptoms.all()),
-            "init_interests": request.GET.get('interests') or ",".join(i.name for i in patient.interests.all())
+            "init_symptoms": request.GET.get('symptom') or ",".join(s.name for s in patient.symptoms.all()),
+            "init_interests": request.GET.get('interest') or ",".join(i.name for i in patient.interests.all())
             }
     )
