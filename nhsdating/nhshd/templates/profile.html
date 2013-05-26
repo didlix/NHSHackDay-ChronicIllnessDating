@@ -6,7 +6,13 @@
 
 <div class="sixteen columns promo">
 
-    {% if patient.photo %}<img src="{{ patient.photo.image.url }} " class="profileimg">{% else %}<img src="https://addons.cdn.mozilla.net/media//img/zamboni/anon_user.png" class="profileimg">{% endif %}
+    <img
+    {% if patient.photo %}
+    src="{{ patient.photo.image.url }}"
+    {% else %}
+    src="http://edgecats.net/"
+    {% endif %}
+    class="profileimg" width="200" height="200">
 
     <h1 id="profile">{{ patient.user.username }}</h1>
 
@@ -15,11 +21,9 @@
     <a href="#" class="button">Message them</a>
     <a href="#" class="button">Save to favourites</a>
     <a href="#" class="button">Report</a>
-
 </div>
 
 <div class="sixteen columns">
-
   {% if patient.personal_words %}
   <div class="columns six">
   <h3>My self-summary</h3>
