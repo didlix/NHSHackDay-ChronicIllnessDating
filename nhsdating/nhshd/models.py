@@ -25,15 +25,15 @@ class Patient(models.Model):
     locations = models.ManyToManyField('Place', null=True)
     symptoms = models.ManyToManyField('Symptom', null=True)
     interests = models.ManyToManyField('Interest', null=True)
-    personal_words = models.TextField()
-    favourite_words = models.TextField()
+    personal_words = models.TextField(blank=True)
+    favourite_words = models.TextField(blank=True)
 
     healthcare_location = models.ManyToManyField('HealthcareLocation', null=True)
     primary_condition = models.ForeignKey('Condition', related_name="primary_condition", null=True)
     other_conditions = models.ManyToManyField('Condition', related_name="other_condition", null=True)
     life_plan = models.TextField(blank=True)
     skills = models.TextField(blank=True)
-    favourite_things = models.TextField(blank=True)
+    favourite_things = models.TextField(blank=True, help_text='IGNORE THIS FIELD PLZ')
     music = models.TextField(blank=True)
     books = models.TextField(blank=True)
     films = models.TextField(blank=True)
@@ -93,4 +93,4 @@ class Condition(models.Model):
 
 class Photo(models.Model):
     created_by = models.ForeignKey('auth.User')
-    image = models.FileField(upload_to=format_filename("/photos/{filename}"))
+    image_url = models.URLField(null=True)

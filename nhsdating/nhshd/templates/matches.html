@@ -7,7 +7,7 @@
 {% for match in matches %}
 <div class="four columns">
     <a href="{% url 'nhshd.views.profile' username=match.user.username %}">
-        <img src="{% if match.photo %}{{ match.photo.image.url }}{% else %}https://addons.cdn.mozilla.net/media//img/zamboni/anon_user.png{% endif %}" class="profileimg" width="100%">
+        <img src="{% if match.photo %}{{ match.photo.image_url }}{% else %}https://addons.cdn.mozilla.net/media//img/zamboni/anon_user.png{% endif %}" class="profileimg" width="100%">
     </a>
     <strong>{{ match.user.username }}</strong>
     <ul>
