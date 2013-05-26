@@ -1,3 +1,4 @@
+# -*- encoding: utf8 -*-
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import TemplateResponse
@@ -6,6 +7,9 @@ from django.db import models
 
 from models import Patient, Message, Interest
 from forms import MessageForm
+import json
+import models
+from models import Patient, Message
 
 def home(request):
     return TemplateResponse(request, 'home.html', {})
@@ -58,7 +62,6 @@ def conversation(request, sender_name):
 def send_message(request, username):
     recipient = get_object_or_404(Patient, user__username = username).user
     sender = request.user
-    
     if request.method == "POST":
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -75,6 +78,14 @@ def send_message(request, username):
     return TemplateResponse(request, 'send.html', {"form": form, "recipient": recipient})
 
 
+def autocomplete(request, class_name):
+    things = getattr(models, class_name).objects.filter(name__istartswith=request.GET['term'])
+
+    return HttpResponse(
+        json.dumps([{"id": t.id, "label": t.name} for t in things]),
+        content_type="application/json"
+    )
+
 def matches(request):
     """
     List of users who have things in common with request.user
@@ -87,12 +98,12 @@ def matches(request):
     matches = Patient.objects.filter(
         other_conditions__in=patient.other_conditions.all()
     ).exclude(pk=patient.id).distinct()
-
     if request.GET.get("interest"):
         interest = get_object_or_404(Interest, name=request.GET["interest"])
         matches = matches.filter(interests=interest)
-
     return TemplateResponse(
         request, 'matches.html',
-        {"matches": matches}
+        {
+            "matches": matches,
+        }
     )

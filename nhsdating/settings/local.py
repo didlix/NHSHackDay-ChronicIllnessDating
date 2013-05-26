@@ -8,7 +8,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'nhsdb',
         'USER': 'nhsdb',
-        'PASSWORD': '',
+        'PASSWORD': 'nhsdb',
         'HOST': 'localhost',
         'PORT': '5432',
     }

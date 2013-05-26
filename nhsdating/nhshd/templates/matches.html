@@ -3,6 +3,50 @@
 {% load markup %}
 
 {% block body %}
+<script>
+    $(function() {
+        $('.condition .tags').tagsInput({
+            autocomplete_url:'/autocomplete/Condition',
+            'width': null
+        });
+        $('.symptom .tags').tagsInput({
+            autocomplete_url:'/autocomplete/Symptom',
+            'width': null
+        });
+        $('.interest .tags').tagsInput({
+            autocomplete_url:'/autocomplete/Interest',
+            'width': null
+        });
+    });
+</script>
+<div class="row">
+    <h4>Show me</h4>
+    <form method="get" class="matchfilter">
+      <div class="row">
+        <div class="columns four condition">
+            <label>Condition: <input class="tags" name="conditions"></label>
+        </div>
+
+        <div class="columns four symptom">
+            <label>Symptom: <input class="tags" name="symptom"></label>
+        </div>
+
+        <div class="columns four interest">
+            <label>Interest: <input class="tags" name="interest"></label>
+        </div>
+
+        <div class="columns four">
+        <label class="age">Age: <input type="text" name="min_age" style="width: 2em"> &ndash; <input type="text" name="max_age" style="width: 2em"></label>
+        <label class="near">Near me: <input type="checkbox" name="near_me"></label> 
+        </div>
+    </div>
+
+        <div class="row">
+            <button type="submit">Find</button>
+        </div>
+    </form>
+</div>
+
 <div class="row">
 {% for match in matches %}
 <div class="four columns">
