@@ -1,10 +1,16 @@
 {% extends "layouts/base.html" %}
 {% load markup %}
+{% load humanize %}
 
 {% block body %}
-<ol>
+<h4>Messages between you and {{ sender }}</h4>
+<div class="twelve columns">
+<a href="{% url 'send_message' username=sender%}" class="button">Send message</a>
+</div>
 {% for message in convo %}
-    <li>{{ message }}
+<div class="row">
+<div class="four columns">{{ message.sender }}<br>{{ message.created_at|naturaltime }}</div>
+<div class="eight columns">{{ message.body|markdown }}</div>
+</div> <!-- row -->
 {% endfor %}
-</ol>
 {% endblock %}

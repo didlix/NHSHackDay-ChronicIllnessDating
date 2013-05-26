@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.shortcuts import get_object_or_404
-from django.db import models
+from django.db import models as django_models
 
 from models import Patient, Message, Interest
 from forms import MessageForm
@@ -51,14 +51,16 @@ def conversation(request, sender_name):
     #patient = get_object_or_404(Patient, user__username=request.user.username)
 
     messages = Message.objects.filter(
-        models.Q(sender__username=sender_name,
+        django_models.Q(sender__username=sender_name,
           receiver=request.user) |
-        models.Q(receiver__username=sender_name,
+        django_models.Q(receiver__username=sender_name,
           sender=request.user)
     ).order_by('-created_at')
 
     return TemplateResponse(request, 'convo.html',
-                            {"convo": messages})
+                            {"convo": messages,
+                            "sender": sender_name,
+                            })
 
 
 def send_message(request, username):
@@ -73,7 +75,7 @@ def send_message(request, username):
             message = Message(sender=sender, body=form.cleaned_data['body'], receiver=recipient)
             message.save()
             return HttpResponseRedirect(
-                reverse('conversation', kwargs={"sender_name": message.sender.username})
+                reverse('conversation', kwargs={"sender_name": message.receiver.username})
             )
     else:
         form = MessageForm()
