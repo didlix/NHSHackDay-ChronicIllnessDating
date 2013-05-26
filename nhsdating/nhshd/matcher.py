@@ -19,4 +19,4 @@ def generate_matches(interests, conditions, symptoms, age_from, age_to, location
             i
         )
 
-    return sorted(matches, key=sort_key)
+    return sorted(matches, key=sort_key, reverse=True)
