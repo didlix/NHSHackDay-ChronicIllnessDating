@@ -48,6 +48,14 @@ class Patient(models.Model):
         return u'%s (%s)' % (self.name, self.user.username)
 
 
+class Message(models.Model):
+    sender = models.ForeignKey('auth.User', related_name="sent_messages")
+    receiver = models.ForeignKey('auth.User', related_name="received_messages")
+    created_at = models.DateTimeField(auto_now_add=True)
+    read_flag = models.BooleanField(default=False)
+    body = models.TextField()
+
+
 class Place(models.Model):
     name = models.CharField(max_length=200)
     location = models.CharField(max_length=200)

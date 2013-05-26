@@ -28,6 +28,14 @@ def profile(request, username):
     return TemplateResponse(request, 'profile.html', {"patient": patient})
 
 
+def inbox(request):
+    patient = get_object_or_404(Patient, user__username=request.user.username)
+
+    messages = request.user.received_messages.distinct('sender')
+
+    return TemplateResponse(request, 'inbox.html',
+                            {"inbox": messages})
+
 def matches(request):
     """
     List of users who have things in common with request.user
