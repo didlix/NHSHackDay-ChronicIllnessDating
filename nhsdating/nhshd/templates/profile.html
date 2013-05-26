@@ -18,7 +18,7 @@
 
     <p>{{ patient.gender }}, {{ patient.age }}<br>{{ patient.locations.all.0 }}</p>
 
-    <a href="{% url 'send_message' username=patient.user.username %}" class="button">Message them</a>
+    <a href="{% url 'send_message' username=patient.user.username %}" class="button">Sendi message</a>
     <a href="#" class="button">Save to favourites</a>
     <a href="#" class="button">Report</a>
 </div>
@@ -98,6 +98,72 @@
       {% for interest in patient.interests.all %}
       <a href="{% url 'matches' %}?interest={{interest.name}}">{{interest.name}}</a>
       {% endfor %}
+  </div>
+  <hr>
+  {% endif %}
+
+  {% if patient.symptoms %}
+  <div class="columns six">
+      <h3>Symptoms</h3>
+  </div>
+  <div class="columns eight">
+      {% for s in patient.symptoms.all %}
+      <a href="{% url 'search' %}?_={{ s.name }}">{{ s.name }}</a>
+      {% endfor %}
+  </div>
+  <hr>
+  {% endif %}
+
+  {% if patient.healthcare_location %}
+  <div class="columns six">
+      <h3>Healthcare locations</h3>
+  </div>
+  <div class="columns eight">
+      {% for x in patient.healthcare_location.all %}
+      <a href="{% url 'search' %}?_={{ x.name }}">{{ x.name }}</a>
+      {% endfor %}
+  </div>
+  <hr>
+  {% endif %}
+
+  {% if patient.primary_condition %}
+  <div class="columns six">
+      <h3>Primary Condition</h3>
+  </div>
+  <div class="columns eight">
+      <a href="{% url 'search' %}?_={{ patient.primary_condition }}">{{ patient.primary_condition }}</a>
+  </div>
+  <hr>
+  {% endif %}
+
+  {% if patient.other_conditions %}
+  <div class="columns six">
+      <h3>Other conditions</h3>
+  </div>
+  <div class="columns eight">
+      {% for x in patient.other_conditions.all %}
+      <a href="{% url 'search' %}?_={{ x.name }}">{{ x.name }}</a>
+      {% endfor %}
+  </div>
+  <hr>
+  {% endif %}
+
+  {% if patient.religion %}
+  <div class="columns six">
+      <h3>Religion</h3>
+  </div>
+  <div class="columns eight">
+      <a href="{% url 'search' %}?_={{ patient.religion.name }}">{{ patient.religion.name }}</a>
+  </div>
+  <hr>
+  {% endif %}
+
+  {% if patient.preoccupations %}
+  <div class="columns six">
+      <h3>Preoccupations</h3>
+  </div>
+  <div class="columns eight">
+      {{ patient.preoccupations|markdown  }}
   </div>
   <hr>
   {% endif %}
