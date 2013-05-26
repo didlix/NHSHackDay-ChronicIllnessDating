@@ -58,7 +58,7 @@ def conversation(request, sender_name):
 def send_message(request, username):
     recipient = get_object_or_404(Patient, user__username = username).user
     sender = request.user
-    
+
     if request.method == "POST":
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -75,6 +75,52 @@ def send_message(request, username):
     return TemplateResponse(request, 'send.html', {"form": form, "recipient": recipient})
 
 
+def _generate_matches(interests, conditions, symptoms, age_from, age_to,locations):
+    matches = Patient.objects.all()
+    return matches
+
+
+def search(request):
+
+    # TODO: Kill me.
+    interests = []
+    if request.GET.get('interests'):
+        names = request.GET.get('interests').split(",")
+        interests = [get_object_or_404(Interest, name=name) for name in names]
+
+    conditions = []
+    if request.GET.get('conditions'):
+        names = request.GET.get('conditions').split(",")
+        conditions = [get_object_or_404(Condition, name=name) for name in names]
+
+    symptoms = []
+    if request.GET.get('symptoms'):
+        names = request.GET.get('symptoms').split(",")
+        symptoms = [get_object_or_404(Symptom, name=name) for name in names]
+
+    locations = []
+    if request.GET.get('locations'):
+        names = request.GET.get('locations').split(",")
+        locations = [get_object_or_404(Location, name=name) for name in names]
+
+    age_from = request.GET.get('age_from')
+    age_to = request.GET.get('age_to')
+
+    matches = _generate_matches(interests=interests,
+                                conditions=conditions,
+                                symptoms=symptoms,
+                                age_from=age_from,
+                                age_to=age_to,
+                                locations=locations
+                                )
+
+    return TemplateResponse(
+        request, 'matches.html',
+        {"matches": matches}
+    )
+    return TemplateResponse()
+
+
 def matches(request):
     """
     List of users who have things in common with request.user
@@ -84,15 +130,12 @@ def matches(request):
 
     patient = get_object_or_404(Patient, user__username=request.user.username)
 
-    matches = Patient.objects.filter(
-        other_conditions__in=patient.other_conditions.all()
-    ).exclude(pk=patient.id).distinct()
+    matches = _generate_matches(interests=patient.interests.all,
+                                conditions=patient.conditions.all,
+                                symptoms=patient.symptoms.all,
+                                age_from=patient.age -3,
+                                age_to=patient.age + 3,
+                                locations=patient.locations.all
+                                )
 
-    if request.GET.get("interest"):
-        interest = get_object_or_404(Interest, name=request.GET["interest"])
-        matches = matches.filter(interests=interest)
-
-    return TemplateResponse(
-        request, 'matches.html',
-        {"matches": matches}
-    )
+    return TemplateResponse(request, 'matches.html', {"matches": matches})
