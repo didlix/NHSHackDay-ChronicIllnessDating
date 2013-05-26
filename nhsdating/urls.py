@@ -8,7 +8,7 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     url(r'^matches', 'nhshd.views.matches', name='matches'),
     url(r'^profile', 'nhshd.views.your_profile', name='your_profile'),
-    url(r'^inbox/(?P<sender_name>[a-z0-9-_]+)', 'nhshd.views.conversation', name='conversation'),
+    url(r'^inbox/(?P<sender_name>[A-Za-z0-9-_]+)', 'nhshd.views.conversation', name='conversation'),
     url(r'^inbox/?$', 'nhshd.views.inbox', name='inbox'),
     url(r'^send/(?P<username>[^/]+)$', 'nhshd.views.send_message', name='send_message'),
     url(r'^autocomplete/(?P<class_name>[a-zA-z]+)$', 'nhshd.views.autocomplete', name='autocomplete'),
