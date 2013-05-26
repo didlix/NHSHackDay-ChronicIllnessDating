@@ -9,6 +9,8 @@ from forms import MessageForm
 import json
 import models
 from models import Patient, Message
+from matcher import generate_matches
+
 
 def home(request):
     return TemplateResponse(request, 'home.html', {})
@@ -79,11 +81,6 @@ def send_message(request, username):
     return TemplateResponse(request, 'send.html', {"form": form, "recipient": recipient})
 
 
-def _generate_matches(interests, conditions, symptoms, age_from, age_to,locations):
-    matches = Patient.objects.all()
-    return matches
-
-
 def search(request):
 
     # TODO: Kill me.
@@ -110,13 +107,13 @@ def search(request):
     age_from = request.GET.get('age_from')
     age_to = request.GET.get('age_to')
 
-    matches = _generate_matches(interests=interests,
-                                conditions=conditions,
-                                symptoms=symptoms,
-                                age_from=age_from,
-                                age_to=age_to,
-                                locations=locations
-                                )
+    matches = generate_matches(interests=interests,
+                               conditions=conditions,
+                               symptoms=symptoms,
+                               age_from=age_from,
+                               age_to=age_to,
+                               locations=locations
+                               )
 
     return TemplateResponse(
         request, 'matches.html',
@@ -141,12 +138,11 @@ def matches(request):
     # Sort by gender first.
 
     patient = get_object_or_404(Patient, user__username=request.user.username)
-    matches = _generate_matches(interests=patient.interests.all,
-                                conditions=patient.other_conditions.all,
-                                symptoms=patient.symptoms.all,
-                                age_from=patient.age -3,
-                                age_to=patient.age + 3,
-                                locations=patient.locations.all
-                                )
+    matches = generate_matches(interests=patient.interests.all,
+                               conditions=patient.other_conditions.all,
+                               symptoms=patient.symptoms.all,
+                               age_from=patient.age -3,
+                               age_to=patient.age + 3,
+                               locations=patient.locations.all)
 
     return TemplateResponse(request, 'matches.html', {"matches": matches})
