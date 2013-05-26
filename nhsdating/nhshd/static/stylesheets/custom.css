@@ -72,6 +72,9 @@ footer p {
 
 img{
   border:1px solid #ccc;
+}
+
+.shadow{
   -moz-box-shadow:5px 5px 10px #bbb;
   -webkit-box-shadow:5px 5px 10px #bbb;
   box-shadow:5px 5px 10px #bbb;

@@ -3,9 +3,16 @@
 {% load markup %}
 
 {% block body %}
-<ol>
+<div class="row">
 {% for match in matches %}
-<li>{{ match }}
+<div class="four columns">
+    <img src="{% if match.photo %}{{ match.photo.image.url }}{% else %}https://addons.cdn.mozilla.net/media//img/zamboni/anon_user.png{% endif %}" class="profileimg" width="100%">
+    <strong>{{ match.user.username }}</strong>
+    <ul>
+        <li><small>{{ match.locations.all.0 }}</small></li>
+    </ul>
+</div> <!-- box -->
 {% endfor %}
+</div> <!-- row -->
 </ol>
 {% endblock %}
