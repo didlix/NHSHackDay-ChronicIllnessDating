@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+{% load markup %}
+
+{% block body %}
+<p>
+<div class="four columns offset-by-four">
+    <img src="{% if recipient.patient.photo %}{{ recipient.patient.photo.image_url }}{% else %}http://edgecats.net/{% endif %}" width="100%">
+    Send {{ recipient }} a message
+    <form method="post">{% csrf_token %}
+        {% for field in form.visible_fields %}
+        {{ field }}
+        {% endfor %} 
+        <input type="submit" value="Send" />
+    </form>
+</div>
+{% endblock %}

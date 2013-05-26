@@ -18,7 +18,7 @@
 
     <p>{{ patient.gender }}, {{ patient.age }}<br>{{ patient.locations.all.0 }}</p>
 
-    <a href="#" class="button">Message them</a>
+    <a href="{% url 'send_message' username=patient.user.username %}" class="button">Message them</a>
     <a href="#" class="button">Save to favourites</a>
     <a href="#" class="button">Report</a>
 </div>
