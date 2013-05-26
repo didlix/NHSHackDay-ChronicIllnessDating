@@ -27,15 +27,15 @@
     <form method="get" class="matchfilter">
       <div class="row">
         <div class="columns four condition">
-            <label>Condition:</label> <input class="tags" name="conditions">
+            <label>Condition:</label> <input class="tags" name="conditions" value="{{ init_conditions }}">
         </div>
 
         <div class="columns four symptom">
-            <label>Symptom:</label> <input class="tags" name="symptom">
+            <label>Symptom:</label> <input class="tags" name="symptom" value="{{ init_symptoms }}">
         </div>
 
         <div class="columns four interest">
-            <label>Interest:</label> <input class="tags" name="interest">
+            <label>Interest:</label> <input class="tags" name="interest" value="{{ init_interests }}">
         </div>
 
         <div class="columns four">
