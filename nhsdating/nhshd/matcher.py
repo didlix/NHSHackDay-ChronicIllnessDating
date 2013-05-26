@@ -13,7 +13,7 @@ def sort_matches(matches, interests, conditions, symptoms, age_from, age_to, loc
         l = p.locations.filter(pk__in=_pks(locations)).count() if locations else None
 
         return (
-            p.age >= int(age_from) and p.age <= int(age_to),
+            (p.age >= int(age_from) and p.age <= int(age_to)) if age_from and age_to else None,
             l,
             pc,
             c,

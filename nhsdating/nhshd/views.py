@@ -111,8 +111,8 @@ def matches(request):
     conditions = _resolve_by_name(Condition, request.GET.get('conditions'))
     symptoms = _resolve_by_name(Symptom, request.GET.get('symptom'))
 
-    age_from = request.GET.get('min_age') or patient.age - 3
-    age_to = request.GET.get('max_age') or patient.age + 3
+    age_from = request.GET.get('min_age')
+    age_to = request.GET.get('max_age')
 
     if request.GET.get('near_me'):
         locations = patient.locations.all()
