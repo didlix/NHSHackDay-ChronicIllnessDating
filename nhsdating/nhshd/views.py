@@ -150,6 +150,7 @@ def matches(request):
                         )
                     ),
             "init_symptoms": request.GET.get('symptom') or ",".join(s.name for s in patient.symptoms.all()),
-            "init_interests": request.GET.get('interest') or ",".join(i.name for i in patient.interests.all())
+            "init_interests": request.GET.get('interest') or ",".join(i.name for i in patient.interests.all()),
+            "near_me": request.GET.get('near_me')
             }
     )
