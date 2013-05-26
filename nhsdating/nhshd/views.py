@@ -11,6 +11,7 @@ import models
 from models import Patient, Message, Condition, Interest, Symptom
 from matcher import sort_matches
 
+from itertools import chain
 
 def home(request):
     return TemplateResponse(request, 'home.html', {})
@@ -139,6 +140,17 @@ def matches(request):
                            )
 
     return TemplateResponse(
-        request, 'matches.html',
-        {"matches": matches}
+            request, 'matches.html',
+            {
+                "matches": matches,
+                "init_conditions": request.GET.get('conditions') or ",".join(
+                    chain(
+                        [patient.primary_condition.name],
+                        (c.name for c in patient.other_conditions.all())
+                        )
+                    ),
+            "init_symptoms": request.GET.get('symptom') or ",".join(s.name for s in patient.symptoms.all()),
+            "init_interests": request.GET.get('interest') or ",".join(i.name for i in patient.interests.all()),
+            "near_me": request.GET.get('near_me')
+            }
     )

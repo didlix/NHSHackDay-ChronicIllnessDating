@@ -151,7 +151,7 @@
       <h3>Religion</h3>
   </div>
   <div class="columns eight">
-      <a href="{% url 'matches' %}?religions={{ patient.religion.name }}">{{ patient.religion.name }}</a>
+      <a href="{% url 'matches' %}?religions={{ patient.religion }}">{{ patient.religion }}</a>
   </div>
   <hr>
   {% endif %}
