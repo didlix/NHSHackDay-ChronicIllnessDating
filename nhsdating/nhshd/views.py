@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.db import models
 
 from models import Patient, Message, Interest
+from forms import MessageForm
 
 def home(request):
     return TemplateResponse(request, 'home.html', {})
@@ -54,18 +55,24 @@ def conversation(request, sender_name):
     return TemplateResponse(request, 'convo.html',
                             {"convo": messages})
 
-def send_message(request):
+def send_message(request, username):
+    recipient = get_object_or_404(Patient, user__username = username).user
+    sender = request.user
+    
     if request.method == "POST":
         form = MessageForm(request.POST)
         if form.is_valid():
-            message = form.save()
+            form.sender_id = sender
+            form.receiver_id = recipient
+            message = Message(sender=sender, body=form.cleaned_data['body'], receiver=recipient)
+            message.save()
             return HttpResponseRedirect(
                 reverse('conversation', kwargs={"sender_name": message.sender.username})
             )
     else:
         form = MessageForm()
 
-    return TemplateResponse(request, 'send.html', {"form": form})
+    return TemplateResponse(request, 'send.html', {"form": form, "recipient": recipient})
 
 
 def matches(request):
