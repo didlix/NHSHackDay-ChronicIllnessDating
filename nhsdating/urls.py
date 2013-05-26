@@ -12,6 +12,7 @@ urlpatterns = patterns(
     url(r'^inbox/(?P<sender_name>[a-z0-9-_]+)', 'nhshd.views.conversation', name='conversation'),
     url(r'^inbox/?$', 'nhshd.views.inbox', name='inbox'),
     url(r'^send/(?P<username>[^/]+)$', 'nhshd.views.send_message', name='send_message'),
+    url(r'^autocomplete/(?P<class_name>[a-zA-z]+)$', 'nhshd.views.autocomplete', name='autocomplete'),
     url(r'^(?P<username>[^/]+)$', 'nhshd.views.profile', name='profile'),
     url(r'^$', 'nhshd.views.home', name='home'),
 )

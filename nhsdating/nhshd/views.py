@@ -6,6 +6,9 @@ from django.db import models
 
 from models import Patient, Message, Interest
 from forms import MessageForm
+import json
+import models
+from models import Patient, Message
 
 def home(request):
     return TemplateResponse(request, 'home.html', {})
@@ -54,6 +57,7 @@ def conversation(request, sender_name):
 
     return TemplateResponse(request, 'convo.html',
                             {"convo": messages})
+
 
 def send_message(request, username):
     recipient = get_object_or_404(Patient, user__username = username).user
@@ -121,6 +125,14 @@ def search(request):
     return TemplateResponse()
 
 
+def autocomplete(request, class_name):
+    things = getattr(models, class_name).objects.filter(name__istartswith=request.GET['term'])
+
+    return HttpResponse(
+        json.dumps([{"id": t.id, "label": t.name} for t in things]),
+        content_type="application/json"
+    )
+
 def matches(request):
     """
     List of users who have things in common with request.user
@@ -129,7 +141,6 @@ def matches(request):
     # Sort by gender first.
 
     patient = get_object_or_404(Patient, user__username=request.user.username)
-
     matches = _generate_matches(interests=patient.interests.all,
                                 conditions=patient.conditions.all,
                                 symptoms=patient.symptoms.all,
