@@ -107,17 +107,25 @@ def matches(request):
         else:
             return []
 
-    interests = _resolve_by_name(Interest, request.GET.get('interests'))
+    interests = _resolve_by_name(Interest, request.GET.get('interest'))
     conditions = _resolve_by_name(Condition, request.GET.get('conditions'))
-    symptoms = _resolve_by_name(Symptom, request.GET.get('symptoms'))
+    symptoms = _resolve_by_name(Symptom, request.GET.get('symptom'))
 
     age_from = request.GET.get('min_age') or patient.age - 3
     age_to = request.GET.get('max_age') or patient.age + 3
 
     if request.GET.get('near_me'):
-        locations = patient.locations.all
+        locations = patient.locations.all()
     else:
         locations = []
+
+    print "Interests: %s" % interests
+    print "Conditions: %s" % conditions
+    print "Symptoms: %s" % symptoms
+    print "Age from: %s" % age_from
+    print "Age to: %s" % age_to
+    print "Locations: %s" % locations
+
 
     matches = generate_matches(interests=interests,
                                conditions=conditions,
