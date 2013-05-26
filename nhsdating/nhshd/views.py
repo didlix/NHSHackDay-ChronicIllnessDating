@@ -142,7 +142,7 @@ def matches(request):
 
     patient = get_object_or_404(Patient, user__username=request.user.username)
     matches = _generate_matches(interests=patient.interests.all,
-                                conditions=patient.conditions.all,
+                                conditions=patient.other_conditions.all,
                                 symptoms=patient.symptoms.all,
                                 age_from=patient.age -3,
                                 age_to=patient.age + 3,
