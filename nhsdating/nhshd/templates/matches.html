@@ -7,15 +7,18 @@
     $(function() {
         $('.condition .tags').tagsInput({
             autocomplete_url:'/autocomplete/Condition',
-            'width': null
+            'width': null,
+            'height': null,
         });
         $('.symptom .tags').tagsInput({
             autocomplete_url:'/autocomplete/Symptom',
-            'width': null
+            'width': null,
+            'height': null,
         });
         $('.interest .tags').tagsInput({
             autocomplete_url:'/autocomplete/Interest',
-            'width': null
+            'width': null,
+            'height': null,
         });
     });
 </script>
@@ -24,15 +27,15 @@
     <form method="get" class="matchfilter">
       <div class="row">
         <div class="columns four condition">
-            <label>Condition: <input class="tags" name="conditions"></label>
+            <label>Condition:</label> <input class="tags" name="conditions">
         </div>
 
         <div class="columns four symptom">
-            <label>Symptom: <input class="tags" name="symptom"></label>
+            <label>Symptom:</label> <input class="tags" name="symptom">
         </div>
 
         <div class="columns four interest">
-            <label>Interest: <input class="tags" name="interest"></label>
+            <label>Interest:</label> <input class="tags" name="interest">
         </div>
 
         <div class="columns four">
