@@ -58,6 +58,10 @@ def conversation(request, sender_name):
           sender=request.user)
     ).order_by('-created_at')
 
+    for message in messages:
+        message.read = True
+        message.save()
+
     return TemplateResponse(request, 'convo.html',
                             {"convo": messages,
                             "sender": sender_name,
@@ -73,7 +77,7 @@ def send_message(request, username):
         if form.is_valid():
             form.sender_id = sender
             form.receiver_id = recipient
-            message = Message(sender=sender, body=form.cleaned_data['body'], receiver=recipient)
+            message = Message(sender=sender, body=form.cleaned_data['body'], receiver=recipient, read=False)
             message.save()
             return HttpResponseRedirect(
                 reverse('conversation', kwargs={"sender_name": message.receiver.username})
