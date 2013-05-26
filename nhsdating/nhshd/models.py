@@ -51,6 +51,13 @@ class Message(models.Model):
     read_flag = models.BooleanField(default=False)
     body = models.TextField()
 
+    @property
+    def sender_photo(self):
+        if self.sender.patient_set:
+            return self.sender.patient_set.all()[0].photo
+        else:
+            return None
+
     def __unicode__(self):
         return u"%s -> %s { %s }" % (self.sender, self.receiver, self.body)
 

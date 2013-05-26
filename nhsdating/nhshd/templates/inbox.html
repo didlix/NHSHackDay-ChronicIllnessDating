@@ -1,4 +1,4 @@
-{% extends "layouts/base.html" %}
+1{% extends "layouts/base.html" %}
 
 {% load markup %}
 {% load humanize %}
@@ -8,7 +8,7 @@
 <ol>
 {% for message in inbox %}
 <li class="message {% if message.read_flag %}read{% endif %}">
-<img src="{% if message.sender.photo %}{{ message.sender.photo.image_url }}{% else %}http://edgecats.net{% endif %}" width="50" height="50">
+    <img src="{% if message.sender_photo %}{{ message.sender_photo.image_url }}{% else %}http://edgecats.net{% endif %}" width="50" height="50">
     <div class="info">
         <span class="sender"><a href="{% url 'conversation' sender_name=message.sender.username %}">{{ message.sender }}</a></span><br>
         <span class="body sample">{{ message.body|slice:"200" }}</span>

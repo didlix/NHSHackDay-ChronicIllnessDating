@@ -4,14 +4,17 @@
 {% block body %}
 <p>
 <div class="four columns">
-    <img src="{% if recipient.patient.photo %}{{ recipient.patient.photo.image_url }}{% else %}http://edgecats.net/{% endif %}" width="100%">
+    {% with recipient.patient_set.all|first as patient %}
+    <img src="{% if patient.photo %}{{ patient.photo.image_url }}{% else %}http://edgecats.net/{% endif %}" width="100%">
+    {% endwith %}
+
 </div>
 <div class="eight columns">
     Send {{ recipient }} a message
     <form method="post">{% csrf_token %}
         {% for field in form.visible_fields %}
         {{ field }}
-        {% endfor %} 
+        {% endfor %}
         <input type="submit" value="Send" />
     </form>
 </div>
