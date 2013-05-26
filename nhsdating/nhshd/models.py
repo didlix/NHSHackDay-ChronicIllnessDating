@@ -93,4 +93,4 @@ class Condition(models.Model):
 
 class Photo(models.Model):
     created_by = models.ForeignKey('auth.User')
-    image = models.FileField(upload_to=format_filename("/photos/{filename}"))
+    image_url = models.URLField(null=True)
