@@ -20,63 +20,70 @@
 
 <div class="sixteen columns">
 
+  {% if patient.personal_words %}
   <div class="columns six">
   <h3>My self-summary</h3>
   </div>
   <div class="columns eight">
   {{ patient.personal_words|markdown  }}
   </div>
-
   <hr>
+  {% endif %}
 
+  {% if patient.life_plan %}
   <div class="columns six">
   <h3>What I'm doing with my life</h3>
   </div>
+
   <div class="columns eight">
   {{ patient.life_plan|markdown }}
   </div>
-
   <hr>
+  {% endif %}
 
+  {% if patient.skills %}
   <div class="columns six">
   <h3>I'm really good at</h3>
   </div>
+
   <div class="columns eight">
   {{patient.skills|markdown}}
   </div>
-
   <hr>
+  {% endif %}
 
+  {% if patient.preocupations %}
   <div class="columns six">
   <h3>I spend a lot of time thinking about</h3>
-
   </div>
+  
   <div class="columns eight">
   {{patient.preocupations|markdown}}
   </div>
+  <hr>
+  {% endif %}
 
-<hr>
-
-
+  {% if patient.favourite_words %}
   <div class="columns six">
   <h3>Favorite books, movies, shows, music, and food</h3>
-
   </div>
+  
   <div class="columns eight">
   {{ patient.favourite_words|markdown }}
   </div>
+  <hr>
+  {% endif %}
 
-<hr>
-
-
+  {% if patient.what_im_looking_for %}
   <div class="columns six">
   <h3>What I'm looking for</h3>
-
   </div>
+
   <div class="columns eight">
   {{patient.what_im_looking_for|markdown}}
   </div>
-
+  <hr>
+  {% endif %}
 
 </div>
 
