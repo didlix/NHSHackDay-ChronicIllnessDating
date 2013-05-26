@@ -11,7 +11,7 @@ def generate_matches(interests, conditions, symptoms, age_from, age_to, location
         l = p.locations.filter(name__in=locations).count() if locations else None
 
         return (
-            p.age >= age_from and p.age <= age_to,
+            p.age >= int(age_from) and p.age <= int(age_to),
             l,
             pc,
             c,
