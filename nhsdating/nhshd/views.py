@@ -9,7 +9,7 @@ import json
 import models
 
 from models import Patient, Message, Condition, Interest, Symptom
-from matcher import generate_matches
+from matcher import sort_matches
 
 
 def home(request):
@@ -102,7 +102,7 @@ def matches(request):
             results = []
             names = names_str.split(",")
             for name in names:
-                results.append(model_cls.objects.filter(name=name))
+                results.extend(model_cls.objects.filter(name=name))
             return results
         else:
             return []
@@ -119,6 +119,7 @@ def matches(request):
     else:
         locations = []
 
+    print "Matching On:"
     print "Interests: %s" % interests
     print "Conditions: %s" % conditions
     print "Symptoms: %s" % symptoms
@@ -126,14 +127,17 @@ def matches(request):
     print "Age to: %s" % age_to
     print "Locations: %s" % locations
 
+    base_matches = Patient.objects.all().exclude(user=request.user)
 
-    matches = generate_matches(interests=interests,
-                               conditions=conditions,
-                               symptoms=symptoms,
-                               age_from=age_from,
-                               age_to=age_to,
-                               locations=locations
-                               )
+    matches = sort_matches(matches=base_matches,
+                           interests=interests,
+                           conditions=conditions,
+                           symptoms=symptoms,
+                           age_from=age_from,
+                           age_to=age_to,
+                           locations=locations,
+                           )
+
     return TemplateResponse(
         request, 'matches.html',
         {"matches": matches}
