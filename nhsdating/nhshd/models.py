@@ -47,6 +47,7 @@ class Patient(models.Model):
     def __unicode__(self):
         return u'%s (%s)' % (self.name, self.user.username)
 
+
 class Place(models.Model):
     name = models.CharField(max_length=200)
     location = models.CharField(max_length=200)

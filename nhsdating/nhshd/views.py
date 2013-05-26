@@ -23,4 +23,13 @@ def matches(request):
     """
     List of users who have things in common with request.user
     """
-    return TemplateResponse(request, 'matches.html', {})
+
+    patient = get_object_or_404(Patient, user__username=request.user.username)
+    matches = Patient.objects.filter(
+        other_conditions__in=patient.other_conditions.all()
+    ).exclude(pk=patient.id).distinct()
+
+    return TemplateResponse(
+        request, 'matches.html',
+        {"matches": matches}
+    )

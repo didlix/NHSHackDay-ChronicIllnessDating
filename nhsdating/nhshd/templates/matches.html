@@ -3,5 +3,9 @@
 {% load markup %}
 
 {% block body %}
-
+<ol>
+{% for match in matches %}
+<li>{{ match }}
+{% endfor %}
+</ol>
 {% endblock %}
