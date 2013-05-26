@@ -151,3 +151,6 @@ HAYSTACK_CONNECTIONS = {
         'INDEX_NAME': 'haystack',
     },
 }
+
+from django12factor import factorise
+globals().update(factorise())

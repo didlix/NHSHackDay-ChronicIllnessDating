@@ -5,3 +5,4 @@ django-haystack
 pyelasticsearch
 requests
 markdown
+-e git+git://github.com/doismellburning/django12factor.git@d3d2e8151e5a6c6c2444ede7d6e0d2bb81a48c95#egg=django12factor-dev
