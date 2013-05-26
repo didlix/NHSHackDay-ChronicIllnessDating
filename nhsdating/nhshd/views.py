@@ -4,7 +4,7 @@ from django.template.response import TemplateResponse
 from django.shortcuts import get_object_or_404
 
 
-from models import Patient
+from models import Patient, Message
 
 def home(request):
     return TemplateResponse(request, 'home.html', {})
@@ -29,10 +29,14 @@ def profile(request, username):
 
 
 def inbox(request):
-    patient = get_object_or_404(Patient, user__username=request.user.username)
+    #patient = get_object_or_404(Patient, user__username=request.user.username)
 
-    messages = request.user.received_messages.distinct('sender')
-
+    messages = []
+    senders = request.user.received_messages.distinct('sender').values_list('sender', flat=True)
+    for sender in senders:
+        latest = Message.objects.filter(sender=sender, receiver=request.user).order_by('-created_at')[0]
+        messages.append(latest)
+    messages.sort(key=lambda m: m.created_at, reverse=True)
     return TemplateResponse(request, 'inbox.html',
                             {"inbox": messages})
 

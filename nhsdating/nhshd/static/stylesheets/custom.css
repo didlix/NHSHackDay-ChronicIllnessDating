@@ -86,3 +86,33 @@ img{
 }
 
 h1 { color: #f60; }
+
+li.message {
+    border-bottom: 1px solid #aaa;
+    height: 50px;
+    list-style: none;
+}
+
+li.message .info {
+    display: inline-block;
+    vertical-align: top;
+    text-overflow:ellipsis;
+}
+
+li.message .body {
+    height: 1em;
+    overflow: hidden;
+}
+
+li.message .body:before {
+    content: "“";
+}
+
+li.message .body:after {
+    content: "”";
+}
+
+li.message .info .when {
+    color: gray;
+}
+

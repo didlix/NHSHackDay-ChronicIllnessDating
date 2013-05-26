@@ -118,7 +118,8 @@ INSTALLED_APPS = (
     'nhshd',
     'haystack',
     'south',
-    'django.contrib.markup'
+    'django.contrib.markup',
+    'django.contrib.humanize'
 )
 
 # A sample logging configuration. The only tangible logging

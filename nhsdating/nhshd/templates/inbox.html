@@ -1,11 +1,20 @@
 {% extends "layouts/base.html" %}
 
 {% load markup %}
+{% load humanize %}
 
 {% block body %}
+<h4>Inbox</h4>
 <ol>
 {% for message in inbox %}
-<li>{{ message }}
+<li class="message {% if message.read_flag %}read{% endif %}">
+    <img src="http://edgecats.net" width="50" height="50">
+    <div class="info">
+        <span class="sender">{{ message.sender }}</span><br>
+        <span class="body sample">{{ message.body|slice:"200" }}</span>
+        <span class="when" title="{{ message.created_at }}">{{ message.created_at|naturalday }}</span>
+    </div>
+</li>
 {% endfor %}
 </ol>
 {% endblock %}

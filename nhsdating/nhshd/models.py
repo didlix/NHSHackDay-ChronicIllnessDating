@@ -55,6 +55,8 @@ class Message(models.Model):
     read_flag = models.BooleanField(default=False)
     body = models.TextField()
 
+    def __unicode__(self):
+        return u"%s -> %s { %s }" % (self.sender, self.receiver, self.body)
 
 class Place(models.Model):
     name = models.CharField(max_length=200)
