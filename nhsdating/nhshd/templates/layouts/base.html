@@ -1,3 +1,4 @@
+{% load nhshd %}
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
@@ -60,7 +61,7 @@
             <li><a href="{% url 'nhshd.views.your_profile' %}">My Profile</a></li>
             <li><a href="/profile/edit">Edit My Profile</a></li>
             <li><a href="{% url 'nhshd.views.matches' %}">Matches & Search</a></li>
-            <li><a href="{% url 'nhshd.views.inbox' %}">Inbox</a></li>
+            <li><a href="{% url 'nhshd.views.inbox' %}">Inbox {% inbox_count %}</a></li>
           </ul>
         </nav>
       </div>
