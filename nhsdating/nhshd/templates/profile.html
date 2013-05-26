@@ -96,7 +96,7 @@
 
   <div class="columns eight">
       {% for interest in patient.interests.all %}
-      <a href="{% url 'search' %}?interests={{interest.name}}">{{interest.name}}</a>
+      <a href="{% url 'matches' %}?interests={{interest.name}}">{{interest.name}}</a>
       {% endfor %}
   </div>
   <hr>

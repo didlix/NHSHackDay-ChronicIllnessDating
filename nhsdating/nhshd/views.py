@@ -4,11 +4,11 @@ from django.template.response import TemplateResponse
 from django.shortcuts import get_object_or_404
 from django.db import models
 
-from models import Patient, Message, Interest
 from forms import MessageForm
 import json
 import models
-from models import Patient, Message
+
+from models import Patient, Message, Condition, Interest, Symptom
 from matcher import generate_matches
 
 
@@ -81,47 +81,6 @@ def send_message(request, username):
     return TemplateResponse(request, 'send.html', {"form": form, "recipient": recipient})
 
 
-def search(request):
-
-    # TODO: Kill me.
-    interests = []
-    if request.GET.get('interests'):
-        names = request.GET.get('interests').split(",")
-        interests = [get_object_or_404(Interest, name=name) for name in names]
-
-    conditions = []
-    if request.GET.get('conditions'):
-        names = request.GET.get('conditions').split(",")
-        conditions = [get_object_or_404(Condition, name=name) for name in names]
-
-    symptoms = []
-    if request.GET.get('symptoms'):
-        names = request.GET.get('symptoms').split(",")
-        symptoms = [get_object_or_404(Symptom, name=name) for name in names]
-
-    locations = []
-    if request.GET.get('locations'):
-        names = request.GET.get('locations').split(",")
-        locations = [get_object_or_404(Location, name=name) for name in names]
-
-    age_from = request.GET.get('age_from')
-    age_to = request.GET.get('age_to')
-
-    matches = generate_matches(interests=interests,
-                               conditions=conditions,
-                               symptoms=symptoms,
-                               age_from=age_from,
-                               age_to=age_to,
-                               locations=locations
-                               )
-
-    return TemplateResponse(
-        request, 'matches.html',
-        {"matches": matches}
-    )
-    return TemplateResponse()
-
-
 def autocomplete(request, class_name):
     things = getattr(models, class_name).objects.filter(name__istartswith=request.GET['term'])
 
@@ -134,15 +93,38 @@ def matches(request):
     """
     List of users who have things in common with request.user
     """
-    # Add three years either side.
-    # Sort by gender first.
-
     patient = get_object_or_404(Patient, user__username=request.user.username)
-    matches = generate_matches(interests=patient.interests.all,
-                               conditions=patient.other_conditions.all,
-                               symptoms=patient.symptoms.all,
-                               age_from=patient.age -3,
-                               age_to=patient.age + 3,
-                               locations=patient.locations.all)
 
-    return TemplateResponse(request, 'matches.html', {"matches": matches})
+    def _resolve_by_name(model_cls, names_str):
+        if names_str:
+            results = []
+            names = names_str.split(",")
+            for name in names:
+                results.append(model_cls.objects.filter(name=name))
+            return results
+        else:
+            return []
+
+    interests = _resolve_by_name(Interest, request.GET.get('interests'))
+    conditions = _resolve_by_name(Condition, request.GET.get('conditions'))
+    symptoms = _resolve_by_name(Symptom, request.GET.get('symptoms'))
+
+    age_from = request.GET.get('min_age') or patient.age - 3
+    age_to = request.GET.get('max_age') or patient.age + 3
+
+    if request.GET.get('near_me'):
+        locations = patient.locations.all
+    else:
+        locations = []
+
+    matches = generate_matches(interests=interests,
+                               conditions=conditions,
+                               symptoms=symptoms,
+                               age_from=age_from,
+                               age_to=age_to,
+                               locations=locations
+                               )
+    return TemplateResponse(
+        request, 'matches.html',
+        {"matches": matches}
+    )
